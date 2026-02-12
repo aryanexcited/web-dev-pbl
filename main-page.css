@@ -1,0 +1,157 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background: rgb(14,14,64);
+    color:white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:12px 20px;
+    background: #0c0c3f;
+    border-bottom:1px solid #ddd;
+}
+
+.search-box{
+    display:flex;
+    align-items:center;
+    background: white;
+    padding:6px 10px;
+    border-radius:6px;
+    width:350px;
+}
+
+.search-box input{
+    border:none;
+    outline:none;
+    margin-left:8px;
+    width:100%;
+}
+
+.top-actions{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    font-weight:500;
+}
+
+.main-section{
+    display:flex;
+    height: calc(100vh - 60px);
+}
+
+.left{
+    width:420px;
+    min-width:420px;
+    padding:20px;
+    background:#15157a;
+    overflow-y: auto;
+}
+
+.manual-entry{
+    display:block;
+    align-items:center;
+    gap:12px;
+    margin-bottom:15px;
+    font-size:20px;
+    font-weight:600;
+}
+
+.left .section-title{
+    font-size:20px;
+    font-weight:600;
+    display:block;
+    margin-bottom:12px;
+}
+
+.title-line{
+    margin-top: 8px;
+    width:100%;
+    height:2px;
+    background:linear-gradient(to right, transparent, white, transparent);;
+    opacity:0.7;
+}
+
+.code-input{
+    width:100%;
+    padding:14px;
+    font-size:22px;
+    border:none;
+    text-align:right;
+    letter-spacing:2px;
+    font-weight:bold;
+    border-radius:8px;
+    margin-bottom:15px;
+}
+.product-preview{
+    display:flex;
+    gap:12px;
+    background:#1c1c8a;
+    padding:12px;
+    border-radius:10px;
+    margin-bottom: 20px;
+}
+
+.product-preview .img{
+    width:60px;
+    height:60px;
+    background:#bbb;
+    border-radius:8px;
+}
+
+.keypad{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap:12px;
+    margin-bottom:20px;
+}
+
+.keypad button{
+    padding:10px 0;
+    font-size:18px;
+    border:none;
+    border-radius:11px;
+    background:#232387;
+    color: white;
+    cursor: pointer;
+}
+
+.keypad button:hover{
+    background:#3a3ad1;
+    translate: calc();
+}
+
+.left-buttons{
+    display:flex;
+    justify-content:space-between;
+}
+
+.left-buttons button{
+    padding:12px 18px;
+    border:none;
+    border-radius:25px;
+    font-weight:bold;
+}
+
+.left-buttons button[type='submit']{
+    background:#242fa5;
+    color:rgb(127, 157, 170);
+}
+
+.left-buttons button[type='reset']{
+    background:#242fa5;
+    color:rgb(127, 157, 170);
+}
+
+.right{
+    flex:1;
+    padding:20px;
+    background:#0c0c3f;
+}
