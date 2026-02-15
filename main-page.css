@@ -1,286 +1,284 @@
 *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
 body{
-    background: rgb(14,14,64);
-    color:white;
-    font-family: Arial, Helvetica, sans-serif;
+    background:#e9edf3;
 }
 
+/* ===================== TOPBAR ===================== */
 .topbar{
+    background:#3f4f6b;
+    padding:18px 60px;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:12px 20px;
-    background: #0c0c3f;
-    border-bottom:1px solid rgba(255,255,255,0.15);
+    color:white;
 }
 
 .search-box{
     display:flex;
     align-items:center;
-    background: white;
-    padding:6px 10px;
-    border-radius:6px;
-    width:350px;
+    background:#2f3e57;
+    padding:12px 18px;
+    border-radius:12px;
+    width:420px;
+    color:#bfc9d9;
 }
 
 .search-box input{
     border:none;
+    background:transparent;
     outline:none;
-    margin-left:8px;
+    color:white;
+    margin-left:10px;
     width:100%;
+    font-size:15px;
 }
 
 .actions{
     display:flex;
     align-items:center;
-    gap:20px;
+    gap:15px;
     font-weight:500;
 }
 
+.actions a{
+    text-decoration:none;
+    color:white;
+}
+
+/* ===================== MAIN SECTION ===================== */
 .main-section{
     display:flex;
-    height: calc(100vh - 60px);
+    gap:30px;
+    padding:40px 60px;
 }
 
+/* ===================== LEFT PANEL ===================== */
 .left{
-    width:420px;
-    min-width:420px;
-    padding:20px;
-    background:#15157a;
-    overflow-y: auto;
+    flex:1;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
 }
 
-.manual-entry{
-    display:block;
-    align-items:center;
-    gap:12px;
-    margin-bottom:15px;
-    font-size:20px;
+.section-title span{
+    font-size:22px;
     font-weight:600;
-}
-
-.left .section-title{
-    font-size:20px;
-    font-weight:600;
-    display:block;
-    margin-bottom:12px;
 }
 
 .title-line{
-    margin-top: 8px;
-    width:100%;
-    height:2px;
-    background:linear-gradient(to right, transparent, white, transparent);;
-    opacity:0.7;
+    width:160px;
+    height:3px;
+    background:#6c8cff;
+    margin-top:8px;
+    margin-bottom:20px;
+    border-radius:3px;
 }
 
 .code-input{
     width:100%;
-    padding:14px;
-    font-size:22px;
-    border:none;
-    text-align:right;
-    letter-spacing:2px;
-    font-weight:bold;
-    border-radius:8px;
-    margin-bottom:15px;
-}
-.product-preview{
-    display:flex;
-    gap:12px;
-    background:#1c1c8a;
-    padding:12px;
+    padding:15px;
+    font-size:26px;
     border-radius:10px;
-    margin-bottom: 20px;
-}
-
-.product-preview .img{
-    width:60px;
-    height:60px;
-    background:#bbb;
-    border-radius:8px;
-}
-
-.product-preview img{
-    width:100%;
-    height:100%;
-    object-fit: cover;
-}
-
-.keypad{
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    gap:12px;
+    border:1px solid #dcdfe6;
     margin-bottom:20px;
 }
 
+.product-preview{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:15px;
+    background:#f4f6fb;
+    border-radius:12px;
+    margin-bottom:25px;
+}
+
+.product-preview .img{
+    width:65px;
+    height:65px;
+    background:#cfd6e4;
+    border-radius:12px;
+}
+
+.product-preview p:first-child{
+    font-weight:600;
+    margin-bottom:5px;
+}
+
+.product-preview p:last-child{
+    color:#666;
+}
+
+/* ===================== KEYPAD ===================== */
+.keypad{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:25px;
+}
+
 .keypad button{
-    padding:10px 0;
-    font-size:18px;
-    border:none;
-    border-radius:11px;
-    background:#232387;
-    color: white;
-    cursor: pointer;
+    padding:18px 0;
+    font-size:20px;
+    border-radius:10px;
+    border:1px solid #dcdfe6;
+    background:white;
+    cursor:pointer;
+    transition:0.2s;
 }
 
 .keypad button:hover{
-    background:#3a3ad1;
-    transform: scale(1.05);
+    background:#f0f4ff;
 }
 
-.keypad button:active{
-    background:#5a5aff;
-    transform: scale(0.95)
-}
-
+/* ===================== LEFT BUTTONS ===================== */
 .left-buttons{
     display:flex;
-    justify-content:space-between;
-}
-
-.left-buttons button{
-    padding:12px 18px;
-    border:none;
-    border-radius:25px;
-    font-weight:bold;
-}
-
-.left-buttons button[type='submit']{
-    background:#242fa5;
-    color:rgb(127, 157, 170);
-}
-
-.left-buttons button[type='reset']{
-    background:#242fa5;
-    color:rgb(127, 157, 170);
-}
-
-/*Right Checkout Panel*/
-
-.right{
-    flex:1;
-    padding:20px;
-    background:#0c0c3f;
-}
-
-.checkout{
-    height:100%;
-    display:flex;
-    flex-direction:column;
     gap:20px;
 }
 
-/*title*/
-.checkout-title{
-    font-size: 22px;
+.left-buttons button{
+    flex:1;
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
     font-weight:600;
-    border-bottom:2px solid rgba(255,255,255,0.2);
-    padding-bottom:10px;
+    cursor:pointer;
+    color:white;
 }
 
-/*items-list*/
-.cart-items{
+.left-buttons button[type="submit"]{
+    background:#38a169;
+}
+
+.left-buttons button[type="reset"]{
+    background:#e53e3e;
+}
+
+/* ===================== RIGHT PANEL ===================== */
+.right{
     flex:1;
-    overflow-y:auto;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+
+.checkout-title{
+    font-size:22px;
+    font-weight:600;
+    margin-bottom:20px;
+}
+
+/* Cart Items */
+.cart-items{
     display:flex;
-    flex-direction: column;
-    gap:12px;
+    flex-direction:column;
+    gap:15px;
+    margin-bottom:20px;
 }
 
 .cart-item{
     display:flex;
     align-items:center;
-    gap:12px;
-    background:#17176b;
+    gap:15px;
     padding:12px;
+    background:#f4f6fb;
     border-radius:12px;
 }
 
 .item-img{
     width:55px;
     height:55px;
-    background:#bbb;
-    border-radius:12px;
+    background:#cfd6e4;
+    border-radius:10px;
 }
 
 .item-info{
     flex:1;
-}
-
-.item-name{
-    font-size: 16px;
+    font-weight:500;
 }
 
 .remove{
-    background:transparent;
+    background:#ff5c5c;
     border:none;
-    color:#ff6b6b;
-    font-size:20px;
+    color:white;
+    width:35px;
+    height:35px;
+    border-radius:8px;
+    font-size:16px;
     cursor:pointer;
 }
 
-.remove:hover{
-    transform:scale(1.2);
-}
-
-/*bill section*/
+/* ===================== BILL ===================== */
 .bill{
-    background:#15157a;
-    padding:13px;
-    border-radius:10px;
+    margin-top:10px;
+    margin-bottom:25px;
 }
 
 .bill .row{
     display:flex;
-    justify-content: space-between;
-    margin:5px 0;
+    justify-content:space-between;
+    margin-bottom:8px;
+    color:#444;
 }
 
 .bill .total{
-    font-size:22px;
-    font-weight:bold;
-    margin-top:10px;
-    border-top:1px solid rgba(255,255,255,0.2);
-    padding-top:10px;
+    font-size:18px;
+    font-weight:600;
+    color:#2f855a;
 }
 
+/* ===================== PAYMENTS ===================== */
 .payments{
     display:grid;
-    grid-template-columns: repeat(4,1fr);
-    gap:10px;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+    margin-bottom:20px;
 }
 
 .pay{
-    padding:12px 0;
+    padding:14px;
     border:none;
     border-radius:10px;
-    background:#242fa5;
     color:white;
+    font-weight:600;
     cursor:pointer;
 }
 
-.pay:hover{
-    background:#3a3ad1;
+.wallet{
+    background:linear-gradient(135deg,#7f5af0,#6246ea);
 }
 
+.card{
+    background:linear-gradient(135deg,#4299e1,#3182ce);
+}
+
+.cash{
+    background:linear-gradient(135deg,#38a169,#2f855a);
+}
+
+.gift{
+    background:linear-gradient(135deg,#f6ad55,#ed8936);
+}
+
+/* ===================== COMPLETE BUTTON ===================== */
 .complete{
-    margin-top:auto;
+    width:100%;
     padding:16px;
     border:none;
-    border-radius:12px;
-    background:#324db7;
-    color:black;
-    font-size:19px;
-    font-weight:bold;
+    border-radius:10px;
+    background:#34495e;
+    color:white;
+    font-size:16px;
+    font-weight:600;
     cursor:pointer;
-}
-
-.complete:hover{
-    background:#2c429c;
 }
