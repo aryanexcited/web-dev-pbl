@@ -1,6 +1,5 @@
 # Dependencies
 node_modules/
-package-lock.json
 yarn.lock
 
 # Environment variables
@@ -38,9 +37,3 @@ Thumbs.db
 # Database
 *.db
 *.sqlite
-
-# Diagrams and documentation
-*.mmd
-*.drawio
-*.docx
-*.pdf

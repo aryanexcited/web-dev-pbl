@@ -12,28 +12,42 @@ const previewName = document.querySelector('.preview-name');
 const previewPrice = document.querySelector('.preview-price');
 
 
-const productDatabase = {
-    '5509': { name: 'Gildan Ultra cotton', price: 200 },
-    '1001': { name: 'Reynolds Sharpie', price: 500 },
-    '2001': { name: 'Shampoo', price: 800 },
-    '3001': { name: 'Dettol', price: 900 }
-};
+let productDatabase = {};
 
-let cartItems = [
-    { id: 1, name: 'Gildan Ultra cotton', price: 1200 },
-    { id: 2, name: '1x Reynolds Sharpie', price: 500 },
-    { id: 3, name: 'Shampoo', price: 800 },
-    { id: 4, name: 'Dettol', price: 900 }
-];
+let cartItems = [];
+
+async function fetchProducts() {
+    try {
+        const response = await fetch('http://localhost:4000/api/products');
+        const products = await response.json();
+        productDatabase = {};
+        products.forEach(p => {
+            productDatabase[p.sku] = {
+                id: p._id,
+                name: p.name,
+                price: p.sellingPrice,
+                sku: p.sku
+            };
+            if (p.barcode) {
+                productDatabase[p.barcode] = productDatabase[p.sku];
+            }
+        });
+        console.log('Products loaded:', productDatabase);
+    } catch (error) {
+        console.error('Failed to fetch products:', error);
+    }
+}
 
 let selectedPaymentMethod = null;
 
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
+    await fetchProducts();
     setupKeypadListeners();
     setupCartListeners();
     setupPaymentListeners();
     updateBill();
+    renderCart(); // Initial empty render
 });
 
 
@@ -67,10 +81,20 @@ function handleAddToCart() {
         return;
     }
     
+    if (!productDatabase[code]) {
+        alert('Product not found in database!');
+        return;
+    }
+
+    const product = productDatabase[code];
     const newItem = {
         id: Date.now(),
-        name: `Product ${code}`,
-        price: (Math.random() * 50 + 5).toFixed(2)
+        productId: product.id,
+        name: product.name,
+        sku: product.sku,
+        price: product.price,
+        quantity: 1,
+        total: product.price
     };
     
     cartItems.push(newItem);
@@ -174,7 +198,7 @@ function handlePaymentMethod(event) {
     console.log('Selected payment method:', selectedPaymentMethod);
 }
 
-function handleCompletePurchase() {
+async function handleCompletePurchase() {
     if (cartItems.length === 0) {
         alert('Cart is empty!');
         return;
@@ -185,16 +209,53 @@ function handleCompletePurchase() {
         return;
     }
     
+    const subtotal = calculateSubtotal();
     const total = calculateTotal();
-    alert(`Purchase completed!\nTotal: ₹${total}\nPayment Method: ${selectedPaymentMethod.toUpperCase()}`);
     
+    const orderPayload = {
+        orderNumber: 'ORD-' + Date.now(),
+        userId: '605c72e21b71452140669b71', // Dummy Object ID since no auth flow
+        items: cartItems.map(item => ({
+            productId: item.productId,
+            name: item.name,
+            sku: item.sku,
+            quantity: item.quantity,
+            price: item.price,
+            total: item.total
+        })),
+        totalItems: cartItems.length,
+        subTotal: parseFloat(subtotal),
+        grandTotal: parseFloat(total),
+        paymentMethod: selectedPaymentMethod.toLowerCase(),
+        paymentStatus: 'paid'
+    };
 
-    cartItems = [];
-    renderCart();
-    updateBill();
-    selectedPaymentMethod = null;
-    paymentButtons.forEach(btn => btn.classList.remove('active'));
-    codeInput.value = '';
+    try {
+        const response = await fetch('http://localhost:4000/api/orders', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(orderPayload)
+        });
+
+        if (!response.ok) {
+            const err = await response.json();
+            throw new Error(err.message || 'Failed to complete purchase');
+        }
+
+        const orderData = await response.json();
+        alert(`Purchase completed!\nOrder Number: ${orderData.orderNumber}\nTotal: ₹${total}\nPayment Method: ${selectedPaymentMethod.toUpperCase()}`);
+        
+        cartItems = [];
+        renderCart();
+        updateBill();
+        selectedPaymentMethod = null;
+        paymentButtons.forEach(btn => btn.classList.remove('active'));
+        codeInput.value = '';
+    } catch (error) {
+        alert(`Error completing purchase: ${error.message}`);
+    }
 }
 
 function calculateTotal() {
