@@ -38,6 +38,7 @@ Thumbs.db
 *.db
 *.sqlite
 *.jpg
-*.pdf
-*.docx
+*.jpeg
 *.mmd
+*.docx
+*.pdf
