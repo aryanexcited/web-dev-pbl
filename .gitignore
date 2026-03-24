@@ -37,3 +37,7 @@ Thumbs.db
 # Database
 *.db
 *.sqlite
+*.jpg
+*.pdf
+*.docx
+*.mmd
